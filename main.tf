@@ -14,6 +14,19 @@ client_secret="Aoh7Q~AXuiZfAsD7V4-fJyftd2aGQb-wU4qt~"
 subscription_id="80826d76-468a-46e5-9960-66b8a8ae2d55"
 }
 
+terraform {
+  backend "azurerm" {
+    storage_account_name = "__terraformstorageaccount__"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+
+    # rather than defining this inline, the Access Key can also be sourced
+    # from an Environment Variable - more information is available below.
+    access_key = "__storagekey__"
+    features {}
+  }
+}
+
 resource "azurerm_resource_group" "example1" {
   name     = "example1-rg"
   location = "EAST US 2"
